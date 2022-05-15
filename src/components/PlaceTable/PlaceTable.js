@@ -9,10 +9,8 @@ export const PlaceTable = ({ coords }) => {
   );
 
   const [update, setUpdate] = useState(new Date());
-  const [loading, setLoading] = useState(false);
 
   const fetchData = useCallback(async () => {
-    setLoading(true);
     const resp = await fetch(
       `${URL}?lat=${+coords.latitude}&lon=${+coords.longitude}&appid=${KEY}&units=metric`
     );
@@ -23,7 +21,6 @@ export const PlaceTable = ({ coords }) => {
     }
     setUpdate(new Date());
     setWeatherData(weatherData);
-    setLoading(false);
   }, [coords.latitude, coords.longitude, weatherData]);
 
   useEffect(() => {
@@ -37,9 +34,6 @@ export const PlaceTable = ({ coords }) => {
     return () => clearInterval(interval);
   }, [fetchData]);
 
-  if (loading) {
-    return <p>Loading....</p>;
-  }
   return (
     <div className={styles.container}>
       <div className={styles.table_container}>
