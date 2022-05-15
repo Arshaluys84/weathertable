@@ -1,21 +1,22 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { KEY, URL } from "../../helpers/config";
 
 import styles from "./PlaceTable.module.css";
 
-const PlaceTable = ({ coords }) => {
+export const PlaceTable = ({ coords }) => {
   const [weatherData, setWeatherData] = useState(
     JSON.parse(localStorage.getItem("wData")) || []
   );
+
   const [update, setUpdate] = useState(new Date());
   const [loading, setLoading] = useState(false);
+
   const fetchData = useCallback(async () => {
     setLoading(true);
     const resp = await fetch(
       `${URL}?lat=${+coords.latitude}&lon=${+coords.longitude}&appid=${KEY}&units=metric`
     );
     const data = await resp.json();
-    console.log(weatherData);
     if (weatherData.filter((i) => i.id === data.id).length === 0) {
       weatherData.push(data);
       localStorage.setItem("wData", JSON.stringify(weatherData));
@@ -39,7 +40,6 @@ const PlaceTable = ({ coords }) => {
   if (loading) {
     return <p>Loading....</p>;
   }
-
   return (
     <div className={styles.container}>
       <div className={styles.table_container}>
@@ -110,5 +110,3 @@ const PlaceTable = ({ coords }) => {
     </div>
   );
 };
-
-export default PlaceTable;

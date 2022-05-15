@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "../UI/Button/Button";
 import { Input } from "../UI/Input/Input";
 
 import styles from "./NewPlace.module.css";
 
-const NewPLace = ({ onSearch }) => {
+export const NewPLace = ({ onSearch }) => {
   const [coords, setCoords] = useState({ latitude: "", longitude: "" });
 
   const onChangHandler = (e) => {
@@ -15,9 +15,9 @@ const NewPLace = ({ onSearch }) => {
       };
     });
   };
+
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(coords);
     onSearch(coords);
     setCoords({ latitude: "", longitude: "" });
   };
@@ -52,5 +52,3 @@ const NewPLace = ({ onSearch }) => {
     </form>
   );
 };
-
-export default NewPLace;

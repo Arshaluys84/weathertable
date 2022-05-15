@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { NewPLace } from "./components/NewPlace/NewPLace";
+import { PlaceTable } from "./components/PlaceTable/PlaceTable";
+
 import "./App.css";
-import NewPLace from "./components/NewPlace/NewPLace";
-import PlaceTable from "./components/PlaceTable/PlaceTable";
 
 function App() {
   const [coords, setCoords] = useState({ latitude: 0, longitude: 0 });
