@@ -15,9 +15,9 @@ export const PlaceTable = ({ coords }) => {
       `${URL}?lat=${+coords.latitude}&lon=${+coords.longitude}&appid=${KEY}&units=metric`
     );
     const data = await resp.json();
+    console.log(data);
     if (weatherData.filter((i) => i.id === data.id).length === 0) {
       weatherData.push(data);
-      localStorage.setItem("wData", JSON.stringify(weatherData));
     }
     setUpdate(new Date());
     setWeatherData(weatherData);
@@ -25,14 +25,15 @@ export const PlaceTable = ({ coords }) => {
 
   useEffect(() => {
     fetchData();
-
+    localStorage.setItem("wData", JSON.stringify(weatherData));
     const interval = setInterval(() => {
       fetchData();
       setUpdate(new Date());
-    }, 30000);
+      localStorage.setItem("wData", JSON.stringify(weatherData));
+    }, 10000);
 
     return () => clearInterval(interval);
-  }, [fetchData]);
+  }, [fetchData, weatherData]);
 
   return (
     <div className={styles.container}>
