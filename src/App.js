@@ -10,7 +10,6 @@ function App() {
   };
   return (
     <div className="App">
-      Hello
       <NewPLace onSearch={onSearch} />
       <PlaceTable coords={coords} />
     </div>

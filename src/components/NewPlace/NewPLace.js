@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Button } from "../UI/Button/Button";
 import { Input } from "../UI/Input/Input";
 
+import styles from "./NewPlace.module.css";
+
 const NewPLace = ({ onSearch }) => {
   const [coords, setCoords] = useState({ latitude: "", longitude: "" });
 
@@ -17,12 +19,13 @@ const NewPLace = ({ onSearch }) => {
     e.preventDefault();
     console.log(coords);
     onSearch(coords);
+    setCoords({ latitude: "", longitude: "" });
   };
 
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler} className={styles.form}>
       <div>
-        <label htmlFor="latitude">Latitude</label>
+        <label htmlFor="latitude"></label>
         <Input
           type="number"
           id="latitude"
@@ -34,7 +37,7 @@ const NewPLace = ({ onSearch }) => {
         />
       </div>
       <div>
-        <label htmlFor="longitude">Longitude</label>
+        <label htmlFor="longitude"></label>
         <Input
           type="number"
           id="longitude"
@@ -45,10 +48,7 @@ const NewPLace = ({ onSearch }) => {
           onChange={onChangHandler}
         />
       </div>
-
-      {/* {isError && <p className="error"> Please,Enter something</p>} */}
       <Button>Search</Button>
-      {/* {isLoading && <Loading />} */}
     </form>
   );
 };
