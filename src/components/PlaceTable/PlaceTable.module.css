@@ -1,0 +1,46 @@
+.table_container {
+    overflow-x: auto;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  
+  .table_head {
+    background-color: #0c2033;
+  }
+  
+  .table_head tr th {
+    padding: 10px 2px;
+    color: #9cb3c9;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  
+  .table_body {
+    text-align: left;
+    background-color:#4a6f91;
+
+  }
+  
+  .table_body tr td {
+     text-align: center;
+    padding: 10px 0px;
+    border-bottom: 2px solid #5e81a1;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  
+  
+  
+   .table_id {
+    color: white;
+   }
+  
+  .table_actions button{
+    margin: 5px 5px;
+  }

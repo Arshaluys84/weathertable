@@ -10,6 +10,7 @@ export const Input = ({ type, id, name, placeholder, value, onChange }) => {
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      step="0.000000001"
     />
   );
 };

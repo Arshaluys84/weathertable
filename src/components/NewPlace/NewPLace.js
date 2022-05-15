@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../UI/Button/Button";
 import { Input } from "../UI/Input/Input";
 
-const NewPLace = () => {
-  const submitHandler = () => {};
+const NewPLace = ({ onSearch }) => {
+  const [coords, setCoords] = useState({ latitude: "", longitude: "" });
+
+  const onChangHandler = (e) => {
+    setCoords((prev) => {
+      return {
+        ...prev,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log(coords);
+    onSearch(coords);
+  };
 
   return (
     <form onSubmit={submitHandler}>
@@ -15,7 +29,8 @@ const NewPLace = () => {
           placeholder="Latitude"
           name="latitude"
           required
-          value=""
+          value={coords.latitude}
+          onChange={onChangHandler}
         />
       </div>
       <div>
@@ -26,7 +41,8 @@ const NewPLace = () => {
           placeholder="Longitude"
           name="longitude"
           required
-          value=""
+          value={coords.longitude}
+          onChange={onChangHandler}
         />
       </div>
 
