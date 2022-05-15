@@ -30,7 +30,7 @@ export const PlaceTable = ({ coords }) => {
       fetchData();
       setUpdate(new Date());
       localStorage.setItem("wData", JSON.stringify(weatherData));
-    }, 10000);
+    }, 30000);
 
     return () => clearInterval(interval);
   }, [fetchData, weatherData]);
