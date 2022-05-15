@@ -15,7 +15,7 @@ export const PlaceTable = ({ coords }) => {
       `${URL}?lat=${+coords.latitude}&lon=${+coords.longitude}&appid=${KEY}&units=metric`
     );
     const data = await resp.json();
-    console.log(data);
+
     if (weatherData.filter((i) => i.id === data.id).length === 0) {
       weatherData.push(data);
     }
