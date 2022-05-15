@@ -9,7 +9,6 @@ export const PlaceTable = ({ coords }) => {
   );
 
   const [update, setUpdate] = useState(new Date());
-
   const fetchData = useCallback(async () => {
     const resp = await fetch(
       `${URL}?lat=${+coords.latitude}&lon=${+coords.longitude}&appid=${KEY}&units=metric`
