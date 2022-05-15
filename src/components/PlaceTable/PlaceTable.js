@@ -14,23 +14,45 @@ export const PlaceTable = ({ coords }) => {
     const resp = await fetch(
       `${URL}?lat=${+coords.latitude}&lon=${+coords.longitude}&appid=${KEY}&units=metric`
     );
+    if (!resp.ok) {
+      throw new Error("Invalid request");
+    }
     const data = await resp.json();
 
     if (weatherData.filter((i) => i.id === data.id).length === 0) {
       weatherData.push(data);
+    } else {
+      weatherData.map((i) => (i.id === data.id ? data : i));
     }
+
     setUpdate(new Date());
     setWeatherData(weatherData);
+    localStorage.setItem(
+      "wData",
+      JSON.stringify(
+        weatherData.filter((i) => i.coord.lat !== 0 && i.coord.lon !== 0)
+      )
+    );
   }, [coords.latitude, coords.longitude, weatherData]);
 
   useEffect(() => {
-    fetchData();
-    localStorage.setItem("wData", JSON.stringify(weatherData));
+    fetchData().catch((err) => console.log(err.message));
+    localStorage.setItem(
+      "wData",
+      JSON.stringify(
+        weatherData.filter((i) => i.coord.lat !== 0 && i.coord.lon !== 0)
+      )
+    );
     const interval = setInterval(() => {
-      fetchData();
+      fetchData().catch((err) => console.log(err.message));
       setUpdate(new Date());
-      localStorage.setItem("wData", JSON.stringify(weatherData));
-    }, 30000);
+      localStorage.setItem(
+        "wData",
+        JSON.stringify(
+          weatherData.filter((i) => i.coord.lat !== 0 && i.coord.lon !== 0)
+        )
+      );
+    }, 10000);
 
     return () => clearInterval(interval);
   }, [fetchData, weatherData]);
