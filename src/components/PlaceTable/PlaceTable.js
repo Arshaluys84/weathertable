@@ -21,7 +21,8 @@ export const PlaceTable = ({ coords }) => {
     if (weatherData.filter((i) => i.id === data.id).length === 0) {
       weatherData.push(data);
     } else {
-      setWeatherData(weatherData.map((i) => (i.id === data.id ? data : i)));
+      let index = weatherData.findIndex((i) => i.id === data.id);
+      weatherData.splice(index, 1, data);
     }
 
     setUpdate(new Date());
